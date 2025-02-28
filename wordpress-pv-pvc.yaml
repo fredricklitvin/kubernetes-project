@@ -10,7 +10,7 @@ spec:
   persistentVolumeReclaimPolicy: Retain
   storageClassName: manual
   hostPath:
-    path: c/Users/User/Desktop/wordpress
+    path: /home/ec2-user/wordpress
 
 ---
 apiVersion: v1

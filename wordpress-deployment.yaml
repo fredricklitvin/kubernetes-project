@@ -1,3 +1,4 @@
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -14,7 +15,7 @@ spec:
     spec:
       containers:
         - name: wordpress
-          image: wordpress-fred
+          image: wordpress:5.8.3-php7.4-apache
           ports:
             - containerPort: 80
               name: wordpress
@@ -23,16 +24,16 @@ spec:
               mountPath: /var/www/html
           env:
             - name: WORDPRESS_DB_HOST
-              value: mariadb-service.default.svc.cluster.local
+              value: mysql-service.default.svc.cluster.local
             - name: WORDPRESS_DB_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: mariadb-secret
-                  key: mariadb_ROOT_PASSWORD
+                  name: mysql-secret
+                  key: MYSQL_ROOT_PASSWORD
             - name: WORDPRESS_DB_USER
               value: root
             - name: WORDPRESS_DB_NAME
-              value: mariadb
+              value: mysql
       volumes:
         - name: wordpress-data
           persistentVolumeClaim:

@@ -1,21 +1,21 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: mariadb-pv
+  name: mysql-pv
 spec:
   capacity:
     storage: 5Gi
   accessModes:
     - ReadWriteOnce
   hostPath:
-    path: "/c/Users/User/Desktop/mariadb"
+    path: /home/ec2-user/mariadb
 
 ---
 
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: mariadb-pvc
+  name: mysql-pvc
 spec:
   accessModes:
     - ReadWriteOnce
@@ -24,4 +24,4 @@ spec:
       storage: 5Gi
   selector:
     matchLabels:
-      app: mariadb
+      app: mysql
