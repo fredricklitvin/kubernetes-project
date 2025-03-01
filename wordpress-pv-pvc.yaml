@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: wordpress-pv
+  name: wordpress-pv-fred
 spec:
   capacity:
     storage: 10Gi
@@ -16,7 +16,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: wordpress-pvc
+  name: wordpress-pvc-fred
 spec:
   accessModes:
   - ReadWriteOnce
