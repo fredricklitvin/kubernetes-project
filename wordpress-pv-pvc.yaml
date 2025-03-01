@@ -10,7 +10,7 @@ spec:
   persistentVolumeReclaimPolicy: Retain
   storageClassName: manual
   hostPath:
-    path: /home/ec2-user/wordpress
+    path: /home/ec2-user/kubernetes-project/wordpress-storage
 
 ---
 apiVersion: v1
