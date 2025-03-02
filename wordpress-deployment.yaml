@@ -1,4 +1,3 @@
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -24,7 +23,7 @@ spec:
               mountPath: /var/www/html
           env:
             - name: WORDPRESS_DB_HOST
-              value: mysql-service.fredrick-test-1.svc.cluster.local
+              value: mysql-service.fred-project.svc.cluster.local
             - name: WORDPRESS_DB_PASSWORD
               valueFrom:
                 secretKeyRef:
@@ -38,18 +37,23 @@ spec:
         - name: wordpress-data
           persistentVolumeClaim:
             claimName: wordpress-pvc-fred
+
 ---
-kind: Service
 apiVersion: v1
+kind: Service
 metadata:
   name: wordpress-service
+  namespace: fred-project
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"v1","kind":"Service","metadata":{"annotations":{},"name":"wordpress-service","namespace":"fredrick-test-1"},"spec":{"ports":[{"name":"http","port":80,"targetPort":80},{"name":"https","port":443,"targetPort":443}],"selector":{"app":"wordpress"},"type":"LoadBalancer"}}
 spec:
-  type: NodePort
-  selector:
-    app: wordpress
+  allocateLoadBalancerNodePorts: true
   ports:
     - name: http
-      protocol: TCP
       port: 80
+      protocol: TCP
       targetPort: 80
-      nodePort: 30007
+  selector:
+    app: wordpress  
+  type: LoadBalancer
