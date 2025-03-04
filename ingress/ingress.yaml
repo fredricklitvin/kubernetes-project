@@ -1,0 +1,38 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: wordpress-ingress
+  namespace: fred-project
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    nginx.ingress.kubernetes.io/use-regex: "true"
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "3600"
+
+spec:
+  ingressClassName: fred-class-1
+  rules:
+  - host: a1b9135e04470451a9637b52ebfe8f97-171013701.us-east-1.elb.amazonaws.com
+    http:
+      paths:
+        -  path: /grafana(/|$)(.*)
+           pathType: ImplementationSpecific
+           backend:
+              service:
+                name: fred-prom-grafana
+                port:
+                  number: 80
+        - path: /login(/|$)(.*)
+          pathType: ImplementationSpecific
+          backend:
+            service:
+              name: fred-prom-grafana
+              port:
+                number: 80
+        - path: /
+          pathType: Prefix
+          backend:
+            service:
+              name: wordpress-service-fred
+              port:
+                number: 80

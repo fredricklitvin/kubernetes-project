@@ -6,7 +6,7 @@ metadata:
     app: mysql
 spec:
   replicas: 1
-  serviceName: mysql
+  serviceName: mysql-service
   selector:
     matchLabels:
       app: mysql
@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: database
-        image: mysql:5.7
+        image: 992382545251.dkr.ecr.us-east-1.amazonaws.com/fredrick-repository:mysql 
         args:
           - "--ignore-db-dir=lost+found"
         envFrom:

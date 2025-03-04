@@ -1,0 +1,14 @@
+controller:
+  rbac:
+    create: "true"
+    scope: "true"
+  scope:
+    enabled: "true"
+    namespace: fred-project
+  service:
+    type: LoadBalancer
+  ingressClassResource:
+    name: fred-class-1
+    enabled: "true"
+    default: "true"
+    controllerValue: "k8s.io/ingress-nginx"

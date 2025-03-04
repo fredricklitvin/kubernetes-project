@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: wordpress
-          image: wordpress:5.8.3-php7.4-apache
+          image: 992382545251.dkr.ecr.us-east-1.amazonaws.com/fredrick-repository:wordpress
           ports:
             - containerPort: 80
               name: wordpress
@@ -42,7 +42,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: wordpress-service
+  name: wordpress-service-fred
   namespace: fred-project
   annotations:
     kubectl.kubernetes.io/last-applied-configuration: |
